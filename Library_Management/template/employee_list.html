@@ -1,0 +1,440 @@
+{% extends 'base.html' %}
+{% load static %}
+{% block content %}
+
+
+
+
+
+<section class="content">
+    <div class="block-header">
+        <div class="row">
+            <div class="col-lg-7 col-md-6 col-sm-12">
+                <h2>Employee List
+                    <!-- <small>Welcome to Oreo</small> -->
+                </h2>
+            </div>
+        </div>
+    </div>
+    <div class="container-fluid">
+        <!-- Basic Examples -->
+        <div class="row clearfix">
+            <div class="col-lg-12">
+                <div class="card">
+
+
+                    <div class="header">
+                        <h2><strong>Basic Examples </strong></h2>
+                        <div>
+                            <button type="button" class="btn btn-primary btn-sm float-right" data-toggle="modal" data-target="#Add_employee_modal" data-backdrop="static" data-keyboard="false">Add Employee</button>
+                        </div>
+                    </div>
+                    
+                    <div class="body" >
+                        <div class="table-responsive" style="overflow-x: hidden;">
+                            
+                            <div id="table_div">
+
+                                {{rendered}}
+
+                            </div>
+                        
+                        </div>                           
+                    </div>
+                
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+
+
+
+<!-- Add employee modal start -->
+
+<div class="modal fade" id="Add_employee_modal" tabindex="-1" data-backdrop="static" data-keyboard="false" role="dialog" aria-labelledby="Add_employee_modalTitle" aria-hidden="true">
+    <div class="modal-dialog modal-dialog-centered" role="document">
+        <div class="modal-content" style="width: 620px;margin-left: -3rem;">
+            <div class="modal-header" style="justify-content: center;">
+                <h6 class="modal-title" id="exampleModalLongTitle">Add Employee</h6>
+               
+            </div>
+
+            <div class="modal-body" style="justify-content: center; width: 620px;">
+                <div class="row clearfix">
+                    
+                    <div class="col-md-6">
+                        <div class="form-group">
+                            <input type="text" id="firsname" class="form-control" placeholder="First Name" />
+                            <div style="display: none;" id="first_name_error">
+                                <span  style="justify-content: center; display: flex; color:red;">Enter first name</span>
+                            </div>
+                            
+                        </div>
+
+                    </div>
+ 
+
+                    <div class="col-md-6">
+                        <div class="form-group">
+                            <input type="text" id="lastname" class="form-control" placeholder="Last Name" />
+                            <div id="last_name_error" style="display: none;">
+                                <span  style="justify-content: center;display: flex;color: red;">Enter last name</span>
+                            </div>
+                            
+                        </div>
+                    </div>
+                </div>
+
+                <div class="row clearfix">
+                    <div class="col-md-6">
+                        <div class="form-group">
+                            <input type="text" id="emailid" class="form-control" placeholder="Email Id" />
+                            <div id="email_error" style="display: none;">
+                                <span  style="justify-content: center;display: flex;color: red;">Enter email</span>
+                            </div>
+                            <div id="valid_email_error" style="display: none;">
+                                <span  style="justify-content: center;display: flex;color: red;display: none;">Enter valid email</span>
+                            </div>
+                            
+                        </div>
+                    </div>
+                    <div class="col-md-6">
+                        <div class="form-group">
+                            <input type="text" id="username" class="form-control" placeholder="Username" />
+                            <div id="username_error" style="display: none;">
+                                <span  style="justify-content: center;display: flex;color: red;">Enter username</span>
+                            </div>
+                           
+                        </div>
+                    </div>
+                </div>
+
+                <div class="row clearfix">
+                    <div class="col-md-6">
+                        <div class="form-group">
+                            <input type="text" id="mobileno" class="form-control" placeholder="Mobile Number" oninput="this.value = this.value.replace(/[^0-9]/g, '').replace(/(\..*)\./g, '$1');" maxlength="10" minlength="10" />
+                            <div id="mobileno_error" style="display: none;">
+                                <span  style="justify-content: center;display: flex;color: red;">Enter mobile number</span>
+                            </div>
+                            
+                        </div>
+                    </div>
+                    <div class="col-md-6">
+                        <div class="form-group">
+                            <input type="date" id="birthdate" class="form-control" placeholder="Date Of Birth" />
+                            <div id="dob_error" style="display: none;">
+                                <span  style="justify-content: center;display: flex;color: red;">Select date of birth</span>
+                            </div>
+                            
+                        </div>
+                    </div>
+                </div>
+
+
+                <div class="row clearfix">
+                    
+                    <div class="col-md-6">
+                        <div class="form-group">
+                            <input type="file" id="profilepic" accept="image/*" class="form-control" placeholder="Select Profile" />
+                            <div id="profilepic_error" style="display: none;">
+                                <span  style="justify-content: center;display: flex;color: red;">Select profile picture</span>
+                            </div>
+                            
+                        </div>
+                    </div>
+                    <div class="col-md-4">
+                        <div class="form-group">
+                            <input type="Password" id="password" class="form-control" placeholder="Password" style="width:15rem;border-right: none;"/>
+                            <div style="display: none;" id="password_error">
+                                <span  style="justify-content: center;display: flex;color: red; margin-left: 3rem;">Enter password</span>
+                            </div>
+
+                            
+                            
+                        </div>
+                    </div>
+
+                    <div class="col-md-2" style="">
+                        <div class="form-group" >
+                            <span style="cursor: pointer;" onclick="toggle_password()">
+                                <i class="fa fa-eye-slash form-control" id="change_icon" style="border-left: none;padding-top: 13px;padding-left: 2rem;"></i>
+                            </span>
+
+                        </div>
+                    </div>
+
+                    <div style="display: none;" id="valid_password_error">
+                        <span style="justify-content: center;display: flex;color: red; margin-left: 22rem;">Password length min 8 char</span>
+                    </div>
+                    
+                </div>
+            </div>
+
+            <div class="modal-footer col-md-6" style="margin-left: 15%;padding-left: 9rem;">
+                <button type="button" id="btn_close" class="btn btn-secondary btn-sm" data-dismiss="modal">Close</button>
+                <button type="button" id="add_employe_btn" class="btn btn-primary btn-sm" onclick="add_employee()">Add</button>
+            </div>
+        </div>
+    </div>
+</div>
+
+<!-- Add employee modal end -->
+
+
+
+
+<script type="text/javascript" src="https://code.jquery.com/jquery-1.11.3.min.js"></script>
+
+<script>
+    $(document).ready(function () {
+        $('#employee_list').addClass('active open')
+    });
+</script>
+
+
+
+<script>
+    function delete_employee(emp_id) {
+        swal.fire({
+            title: 'Are you sure?',
+            icon: 'warning',
+            allowOutsideClick: false,
+            showCancelButton: true,
+            confirmButtonColor: '#3085d6',
+            cancelButtonColor: '#d33',
+            confirmButtonText: 'Yes, delete!',
+        }).then((result) => {
+            if(result.isConfirmed){
+                $.ajax({
+                    method: "POST",
+                    url: "{% url 'delete_employee_by_admin' %}",
+                    contentType: "application/json",
+                    data: JSON.stringify({
+                        'emp_id': emp_id
+                    }),
+                    success: function (response) {
+                        if (response['status'] == '1') {
+                            swal.fire({
+                                title: response.msg,
+                                icon: 'success',
+                                allowOutsideClick: false,
+                                showCancelButton: false,
+                                confirmButtonColor: '#3085d6',
+                                confirmButtonText: 'Thank You!',
+                            }).then((result) => {
+                                if (result.isConfirmed) {
+                                    $("#table_div").html(response.rendered);
+                                }
+                            })
+                        }
+                        else {
+                            swal.fire({
+                                title: response.msg,
+                                icon: 'error',
+                                showCancelButton: true,
+                                cancelButtonColor: '#d33',
+                                showConfirmButton: false,
+                                allowOutsideClick: false
+                            })
+                        }
+                    }
+                })
+            }
+        })
+    }
+        
+
+/* function for toggle the password*/
+
+function toggle_password(){
+    if ($('#password').attr('type') == 'password') {
+        
+        $("#password").get(0).type = 'text';
+        $('#change_icon').removeClass('fa fa-eye-slash');
+        $('#change_icon').addClass('fa fa-eye');
+    }
+    else {
+        
+        $("#password").get(0).type = 'password';
+        $('#change_icon').removeClass('fa fa-eye');
+        $('#change_icon').addClass('fa fa-eye-slash');
+    }
+}        
+
+
+
+/* function for Add Employee */
+
+document.addEventListener("keyup", function (event) {
+    if (event.keyCode === 13) {
+        $("#add_employe_btn").click();
+    }
+})
+
+
+$("#firsname").keyup(function(){
+    $("#first_name_error").hide()
+})
+
+$("#lastname").keyup(function () {
+    $("#last_name_error").hide()
+})
+
+$("#emailid").keyup(function () {
+    $("#email_error").hide()
+    $("#valid_email_error").hide()
+})
+
+$("#username").keyup(function () {
+    $("#username_error").hide()
+})
+
+$("#mobileno").keyup(function () {
+    $("#mobileno_error").hide()
+})
+
+$("#birthdate").click(function () {
+    $("#dob_error").hide()
+})
+
+$("#profilepic").click(function () {
+    $("#profilepic_error").hide()
+})
+
+$("#password").keyup(function () {
+    $("#password_error").hide()
+    $("#valid_password_error").hide()
+})
+
+function add_employee(){
+    //alert('hello')
+
+    var firstname = $("#firsname").val()
+    var lastname = $("#lastname").val()
+    var email = $("#emailid").val()
+    var username = $("#username").val()
+    var mobileno = $("#mobileno").val()
+    var birthdate = $("#birthdate").val()
+    var profilepic = $("#profilepic").val()
+    var password = $("#password").val()
+
+    emailfilter = /^\b[A-Z0-9._%-]+@[A-Z0-9.-]+\.[A-Z]{2,4}\b$/i;
+    console.log(firstname,lastname, email,username,mobileno,birthdate,profilepic,password)
+
+
+    var form_data = new FormData();
+
+    form_data.append('firstname', firstname);
+    form_data.append('lastname', lastname);
+    form_data.append('email', email);
+    form_data.append('username', username);
+    form_data.append('mobileno', mobileno);
+    form_data.append('birthdate', birthdate);
+    form_data.append('password', password);
+    form_data.append("profilepic", document.getElementById("profilepic").files[0])
+    
+
+    if (firstname == ''){
+        $("#firsname").focus()
+        $("#first_name_error").show()
+    }
+
+    else if (lastname == '') {
+        $("#lastname").focus()
+        $("#last_name_error").show()
+    }
+
+    else if (email == '') {
+        $("#emailid").focus()
+        $("#email_error").show()
+    }
+
+
+    else if (!emailfilter.test(email)) {
+
+        $("#emailid").focus();
+        $("#valid_email_error").show();
+    }
+
+    else if (username == '') {
+        $("#username").focus()
+        $("#username_error").show()
+    }
+
+    else if (mobileno == '') {
+        $("#mobileno").focus()
+        $("#mobileno_error").show()
+    }
+
+    else if (birthdate == '') {
+        $("#birthdate").focus()
+        $("#dob_error").show()
+    }
+
+    else if (profilepic == '') {
+        $("#profilepic").focus()
+        $("#profilepic_error").show()
+    }
+
+    else if (password == '') {
+        $("#password").focus()
+        $("#password_error").show()
+    }
+
+    else if (password.length <= 7) {
+
+        $("#valid_password_error").show();
+    }
+
+    else
+        {
+            
+            $.ajax({
+                method:"POST",
+                url:"{% url 'Add_employee_by_admin' %}",
+                enctype: "mutipart/form_data",
+                processData: false,
+                contentType: false,
+                cache: false,
+                data: form_data,
+                success:function(response){
+                    if (response['status'] == '1') {
+
+                        $("#btn_close").trigger("click")
+                        
+                        swal.fire({
+                            title: response.msg,
+                            icon: 'success',
+                            allowOutsideClick: false,
+                            showCancelButton: false,
+                            confirmButtonColor: '#3085d6',
+                            confirmButtonText: 'Thank You!',
+                        }).then((result) => {
+                            if (result.isConfirmed) {
+                                
+                                $("#table_div").html(response.rendered);
+        
+                            }
+                        })
+                    }
+                    else
+                        swal.fire({
+                            title: response.msg,
+                            icon: 'error',
+                            showCancelButton: true,
+                            cancelButtonColor: '#d33',
+                            showConfirmButton: false,
+                            allowOutsideClick: false
+                        })
+                }
+            })
+        }
+}
+
+</script>
+
+<script src="https://cdnjs.cloudflare.com/ajax/libs/bootstrap/4.6.0/js/bootstrap.min.js"
+    integrity="sha512-XKa9Hemdy1Ui3KSGgJdgMyYlUg1gM+QhL6cnlyTe2qzMCYm4nAZ1PsVerQzTTXzonUR+dmswHqgJPuwCq1MaAg=="
+    crossorigin="anonymous" referrerpolicy="no-referrer"></script>
+{% endblock content %}

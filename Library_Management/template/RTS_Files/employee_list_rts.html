@@ -1,0 +1,37 @@
+{% load static %}
+
+    <table class="table table-bordered table-striped table-hover js-basic-example dataTable">
+        <thead>
+            <tr>
+                <th>Sr No</th>
+                <th>Name</th>
+                <th>Email</th>
+                <th>Username</th>
+                <th>Date Of Birth</th>
+                <th>Mobile No</th>
+                <th>Action</th>
+                
+            </tr>
+        </thead>
+
+        <tbody>
+            {% for i in Emp_obj %}
+            <tr>            
+                <td>{{forloop.counter}}</td>
+                <td>{{i.first_name}} {{i.first_name}}</td>
+                <td>{{i.email }}</td>
+                <td>{{i.username}}</td>
+                <td>{{i.date_of_birth | date:'d - m - Y'}}</td>
+                <td>{{i.mobile_no}}</td>
+                <td>
+                    <span style="cursor:pointer"><i class="fas fa-edit" ></i></span>
+                    <span  style="margin-left: 15%;cursor: pointer;" onclick="delete_employee('{{i.id}}')"><i class="fas fa-trash"></i></span>
+                </td>
+            
+            </tr>
+            {% endfor %}
+        </tbody>
+    </table>
+
+
+<script src="{% static 'assets/js/pages/tables/jquery-datatable.js' %}"></script>

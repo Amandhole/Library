@@ -1,0 +1,149 @@
+﻿{% load static %}
+<!doctype html>
+<html class="no-js " lang="en">
+
+<!-- Mirrored from thememakker.com/templates/oreo/html/light/sign-in.html by HTTrack Website Copier/3.x [XR&CO'2014], Thu, 27 Aug 2020 14:36:51 GMT -->
+<head>
+<meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=Edge">
+    <meta content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no" name="viewport">
+    <meta name="description" content="Responsive Bootstrap 4 and web Application ui kit.">
+
+    <title>Admin Login</title>
+    <!-- Favicon-->
+    <link rel="icon" href="favicon.ico" type="image/x-icon">
+    <!-- Custom Css -->
+    <link rel="stylesheet" href="{% static 'assets/plugins/bootstrap/css/bootstrap.min.css' %}">
+    <link rel="stylesheet" href="{% static 'assets/css/main.css' %}">
+    <link rel="stylesheet" href="{% static 'assets/css/authentication.css' %}">
+    <link rel="stylesheet" href="{% static 'assets/css/color_skins.css' %}">
+</head>
+
+<body class="theme-purple authentication sidebar-collapse">
+<!-- Navbar -->
+
+<!-- End Navbar -->
+<div class="page-header">
+    <div class="page-header-image" style="background-image:url({% static 'assets/images/library_img.jpg' %})"></div>
+    <div class="container">
+        <div class="col-md-12 content-center">
+            <div class="card-plain">
+
+
+                <!-- login form start from here -->
+                    <div class="content">                                                
+                        
+                        <!-- user name feild div start  -->
+                        <div class="input-group input-lg">
+                            <input type="text" id="admin_username" class="form-control" placeholder="Enter User Name">
+                            <!-- <span class="input-group-addon"> <i class="zmdi zmdi-account-circle"></i></span> -->
+                        </div>
+
+                        <div  id="admin_username_error" style="color:#f37777;display: none;">
+                            <span> Enter Username</span>
+                        </div>
+                        <!-- user name feild div end -->
+
+                        <div class="input-group input-lg">
+                            <input type="password" id="admin_password" placeholder="Password" class="form-control" />
+                        </div>
+                        <div id="admin_password_error" style="color:#f37777;display: none;">
+                            <span> Enter Password</span>
+                        </div>
+                    </div>
+                    <div class="footer text-center">
+                        <a  class="btn btn-primary btn-round btn-lg btn-block " onclick="admin_login()">LOGIN</a>
+                       
+                    </div>
+                <!-- login form end here -->
+            </div>
+        </div>
+    </div>
+    <footer class="footer">
+        
+    </footer>
+</div>
+
+<!-- Jquery Core Js -->
+<script src="{% static 'assets/bundles/libscripts.bundle.js' %}"></script>
+<script src="{% static 'assets/bundles/vendorscripts.bundle.js' %}"></script> <!-- Lib Scripts Plugin Js -->
+
+<!-- jquery for sweetalert -->
+<script src="//cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+
+
+<script>
+   $(".navbar-toggler").on('click',function() {
+    $("html").toggleClass("nav-open");
+});
+//=============================================================================
+$('.form-control').on("focus", function() {
+    $(this).parent('.input-group').addClass("input-group-focus");
+}).on("blur", function() {
+    $(this).parent(".input-group").removeClass("input-group-focus");
+});
+</script>
+
+
+<script>
+    $("#admin_username").keyup(function(){
+        $("#admin_username_error").hide()
+        $("#admin_username").css('border-color', 'rgba(255,255,255,0.5)') 
+    })
+
+    $("#admin_password").keyup(function () {
+        $("#admin_password_error").hide()
+        $("#admin_password").css('border-color', 'rgba(255,255,255,0.5)')
+    })
+
+    function admin_login(){
+        username = $("#admin_username").val()
+        password = $("#admin_password").val()
+        if (username == ''){
+            $("#admin_username_error").show()
+            $("#admin_username").focus()
+            $("#admin_username").css('border', '1px solid #f37777')
+        }
+
+
+        else if (password == ''){
+            $("#admin_password_error").show()
+            $("#admin_password").focus()
+            $("#admin_password").css('border', '1px solid #f37777')
+        }
+
+
+        else{
+            $.ajax({
+                method:"POST",
+                url:"{% url 'Admin_Login' %}",
+                contentType:"application/json",
+                data:JSON.stringify({
+                    "admin_username": username,
+                    "admin_password": password
+                }),
+                success:function (response){
+                    if (response['status']=="1"){
+                        location.href="{% url 'Dasboard' %}"
+                    }
+
+                    else{
+                        swal.fire({
+                            title: response.msg,
+                            icon: 'error',
+                            showCancelButton: true,
+                            cancelButtonColor: '#d33',
+                            showConfirmButton: false, 
+                            allowOutsideClick: false
+                        })
+                    }
+                }
+            })
+        }
+
+    }
+</script>
+</body>
+
+
+</html>

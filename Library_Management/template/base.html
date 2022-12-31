@@ -1,0 +1,182 @@
+{% load static %}
+<!doctype html>
+<html class="no-js " lang="en">
+
+    <!-- Mirrored from thememakker.com/templates/oreo/html/light/blog-dashboard.html by HTTrack Website Copier/3.x [XR&CO'2014], Thu, 27 Aug 2020 14:37:15 GMT -->
+
+    <head>
+        <meta charset="utf-8">
+        <meta http-equiv="X-UA-Compatible" content="IE=Edge">
+        <meta content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no" name="viewport">
+        <meta name="description" content="Responsive Bootstrap 4 and web Application ui kit.">
+
+        <title>Library Management</title>
+        <link rel="icon" href="favicon.ico" type="image/x-icon">
+        
+        <!-- Favicon-->
+        <link rel="stylesheet" href="{% static 'assets/plugins/bootstrap/css/bootstrap.min.css' %}">
+        <link rel="stylesheet" href="{% static 'assets/plugins/jvectormap/jquery-jvectormap-2.0.3.css' %}" />
+        <link rel="stylesheet" href="{% static 'assets/plugins/morrisjs/morris.css' %}" />
+
+        <!-- JQuery DataTable Css -->
+
+        <link rel="stylesheet" href="{% static 'assets/plugins/jquery-datatable/dataTables.bootstrap4.min.css' %}">
+        <!-- Custom Css -->
+        <link rel="stylesheet" href="{% static 'assets/css/main.css' %}">
+        <link rel="stylesheet" href="{% static 'assets/css/blog.css' %}">
+        <link rel="stylesheet" href="{% static 'assets/css/color_skins.css' %}">
+        <!-- font awesome link -->
+        <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.2.1/css/all.min.css"
+            integrity="sha512-MV7K8+y+gLIBoVD59lQIYicR65iaqukzvf/nwasF0nqhPay5w/9lJmVM2hMDcnK1OnMGCdVK+iQrJ7lzPJQd1w=="
+            crossorigin="anonymous" referrerpolicy="no-referrer" />
+        
+        
+            
+    </head>
+    
+    <body class="theme-purple">
+        <!-- Page Loader -->
+        <div class="page-loader-wrapper">
+            <div class="loader">
+                <div class="m-t-30"><img class="zmdi-hc-spin"
+                        src="https://thememakker.com/templates/oreo/html/assets/images/logo.svg" width="48" height="48"
+                        alt="Oreo"></div>
+                <p>Please wait...</p>
+            </div>
+        </div>
+
+        <!-- Overlay For Sidebars -->
+        <div class="overlay"></div>
+
+        <!-- Top Bar -->
+        <nav class="navbar p-l-5 p-r-5">
+            <ul class="nav navbar-nav navbar-left">
+                <li>
+                    <div class="navbar-header">
+                        <a href="javascript:void(0);" class="bars"></a>
+                        <a class="navbar-brand" href="{% url 'Dasboard' %}"><img src="https://thememakker.com/templates/oreo/html/assets/images/logo.svg" width="30" alt="Oreo"><span class="m-l-10">Library</span></a>
+                    </div>
+                <li><a href="javascript:void(0);" class="ls-toggle-btn" data-close="true"><i class="zmdi zmdi-swap"></i></a></li>
+
+                <li class="float-right">
+                    <a  onclick="logout()"  style="cursor: pointer;" class="mega-menu" data-close="true"><i class="zmdi zmdi-power"></i></a>
+                </li>
+            </ul>
+        </nav>
+
+        <!-- Left Sidebar -->
+        <aside id="leftsidebar" class="sidebar">
+            <div class="tab-content">
+                <div class="tab-pane stretchLeft active" id="Blog">
+                    <div class="menu">
+                        <ul class="list">
+                            <li>
+                                <div class="user-info m-b-20 p-b-15">
+                                    <div class="image"><a href="profile.html"><img
+                                                src="{% static 'assets/images/profile_av.jpg' %}" alt="User"></a></div>
+                                    <div class="detail">
+                                        <h4>Michael</h4>
+                                    </div>
+                                </div>
+                            </li>
+                            <!-- <li class="header">MAIN NAVIGATION</li> -->
+                            
+                            <li id="dashboard"><a href="{% url 'Dasboard' %}"><i class="zmdi zmdi-home"></i><span>Dashboard</span> </a> </li>
+                            <li id="employee_list"><a href="{% url 'Employee_list' %}"><i class="zmdi zmdi-sort-amount-desc"></i><span>Employee List</span> </a> </li>
+                            <li id="student_list"><a href="{% url 'student_list' %}"><i class="zmdi zmdi-sort-amount-desc"></i><span>Students List</span> </a> </li>
+                            
+                            <!-- <li> <a href="blog-post.html"><i class="zmdi zmdi-plus-circle"></i><span>New Post</span></a> </li>
+                            <li><a href="blog-grid.html"><i class="zmdi zmdi-grid"></i><span>Blog Grid</span> </a> </li>
+                            <li><a href="blog-details.html"><i class="zmdi zmdi-label-alt"></i><span>Blog Single</span></a> </li> -->
+                        </ul>
+                    </div>
+                </div>
+            </div>
+        </aside>
+
+        <!-- start content from here -->
+        
+        {% block content %}
+
+
+
+        {% endblock content %}
+
+        <!--   end content here    -->
+
+
+        <!-- Jquery Core Js -->
+        <script src="{% static 'assets/bundles/libscripts.bundle.js' %}"></script> <!-- Lib Scripts Plugin Js -->
+        <script src="{% static 'assets/bundles/vendorscripts.bundle.js' %}"></script> <!-- Lib Scripts Plugin Js -->
+
+        <script src="{% static 'assets/bundles/jvectormap.bundle.js' %}"></script> <!-- JVectorMap Plugin Js -->
+        <script src="{% static 'assets/plugins/jvectormap/jquery-jvectormap-us-aea-en.js' %}"></script>
+        <!-- USA Map Js -->
+
+        <script src="{% static 'assets/bundles/morrisscripts.bundle.js' %}"></script><!-- Morris Plugin Js -->
+        <script src="{% static 'assets/bundles/index.bundle.html"></script> 
+
+        <script src="{% static 'assets/bundles/mainscripts.bundle.js' %}"></script><!-- Custom Js -->
+        <script src="{% static 'assets/js/pages/blog/blog.js' %}"></script>
+
+
+
+
+        <!-- Jquery DataTable Plugin Js -->
+        <script src="{% static 'assets/bundles/datatablescripts.bundle.js' %}"></script>
+        <script src="{% static 'assets/plugins/jquery-datatable/buttons/dataTables.buttons.min.js' %}"></script>
+        <script src="{% static 'assets/plugins/jquery-datatable/buttons/buttons.bootstrap4.min.js' %}"></script>
+        <script src="{% static 'assets/plugins/jquery-datatable/buttons/buttons.colVis.min.js' %}"></script>
+        <script src="{% static 'assets/plugins/jquery-datatable/buttons/buttons.html5.min.js' %}"></script>
+        <script src="{% static 'assets/plugins/jquery-datatable/buttons/buttons.print.min.js' %}"></script>
+        <!-- <script src="{% static 'assets/bundles/mainscripts.bundle.js' %}"></script>Custom Js -->
+        <script src="{% static 'assets/js/pages/tables/jquery-datatable.js' %}"></script>
+        <!-- end Jquery DataTable Plugin Js -->
+        <!-- for sweet alert -->
+        <script src="//cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+       
+        
+            <script>
+        
+            function logout() {
+                swal.fire({
+                    title: 'Are you sure?',
+                    icon: 'warning',
+                    allowOutsideClick: false,
+                    showCancelButton: true,
+                    confirmButtonColor: '#3085d6',
+                    cancelButtonColor: '#d33',
+                    confirmButtonText: 'Yes, logout!',
+                }).then((result) => {
+                    if (result.isConfirmed) {
+                        $.ajax({
+                            method: "POST",
+                            url: "{% url 'Admin_logout' %}",
+                            contentType: "application/json",
+                            data: JSON.stringify({
+                            }),
+                            success: function (response) {
+                                if (response['status'] == '1') {
+                                    location.href = "{% url 'Admin_Login' %}"
+                                }
+                                else {
+                                    swal({
+                                        icon: "error",
+                                        text: response.msg,
+                                        closeOnClickOutside: false
+                                    })
+                                }
+
+                            }
+                        })
+                    }
+
+                })
+            }
+
+        </script>
+    </body>
+
+   
+
+</html>
